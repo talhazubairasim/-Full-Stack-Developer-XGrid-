@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="clock-container">
+    <div id="clock" class="clock">
+        <div id="clock-ticks" class="clock-ticks">
+            <div id="hours" class="hours"></div>
+            <div id="minutes" class="minutes"></div>
+            <div id="seconds" class="seconds"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .clock-container {
+        text-align:center;
+    }
+
+    .clock {
+        width:200px;
+        height:200px;
+        border-radius:50%;
+        border:solid;
+        position:relative;
+    }
+
+    .minutes {
+        height:2px;
+        width:50%;
+        transform: rotate(166deg);
+        transform-origin:100%;
+        background-color:black;
+        position:absolute;
+        margin-top:50%;
+    }
+
+
+    .hours {
+        height: 2px;
+        width: 50%;
+        transform: rotate(45deg);
+        transform-origin: 100%;
+        background-color: black;
+        position: absolute;
+        margin-top: 50%;
+    }
+
+    .clock-ticks{
+        height:2px;
+        width:1px;
+        position:absolute;
+    }
+
+
+    /*.seconds {
+        height: 2px;
+        width: 50%;
+        transform: rotate(135deg);
+        transform-origin: 100%;
+        background-color: black;
+        position: absolute;
+        margin-top: 50%;
+    }*/
+
+
+</style>
+
+<script>
+    function updateClock(){
+        const date = new Date();
+        const secondHand = document.getElementById('seconds');
+        const minuteHand = document.getElementById('minutes');
+        const hourHand = document.getElementById('hours');
+
+        const seconds = date.getSeconds();
+        const minutes = date.getMinutes();
+        const hours = date.getHours() % 12;
+
+        rotateHand(secondHand, (seconds / 60) * 360);
+        rotateHand(minuteHand, (minutes + (seconds / 60) * 360));
+        rotateHand(hourHand, (seconds / 60) * 360);
+
+    }
+
+    function rotateHand(hand, degrees){
+        hand.style.transform = `rotate(${degrees}deg)`
+    }
+</script>
